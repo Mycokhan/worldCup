@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFA World Cup 2026</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #001122 0%, #0a0a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 10;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ffff; }
+            to { text-shadow: 0 0 30px #ff00ff; }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hosts {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .host {
+            font-size: 1.2rem;
+            color: #00ffff;
+        }
+
+        .countdown {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .countdown-item span {
+            display: block;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        /* Animated Football */
+        .football {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #ffffff 30%, #000000 70%);
+            border-radius: 50%;
+            animation: bounce 3s ease-in-out infinite;
+            z-index: 5;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #00ffff;
+            text-shadow: 0 0 15px #00ffff;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Timetable */
+        .timetable-day {
+            margin-bottom: 2rem;
+        }
+
+        .timetable-date {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .timetable-match {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 20, 40, 0.8);
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .timetable-match:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .match-time {
+            font-weight: bold;
+            color: #00ffff;
+        }
+
+        .match-teams {
+            flex: 1;
+            text-align: center;
+        }
+
+        .match-stadium {
+            font-size: 0.9rem;
+            color: #cccccc;
+        }
+
+        .match-stage {
+            font-size: 0.8rem;
+            color: #00ff00;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        th {
+            background: rgba(0, 255, 255, 0.2);
+            color: #00ffff;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Grid for teams, news, stadiums */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Button */
+        .btn {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border: none;
+            padding: 1rem 2rem;
+            color: #ffffff;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.7);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #00ffff;
+            text-decoration: none;
+        }
+
+        .social-icons {
+            margin-bottom: 2rem;
+        }
+
+        .social-icons a {
+            margin: 0 1rem;
+            color: #ffffff;
+            font-size: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .matches {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Loading Spinner */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #00ffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Live Badge */
+        .live-badge {
+            background: #ff0000;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: pulse 1s infinite;
+            margin-left: 1rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Live Match Highlight */
+        .match.live {
+            border-color: #ff0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        /* Error Message */
+        .error-message {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            color: #ffcccc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .success-message {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #00ff00;
+            color: #ccffcc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="logo">FIFA World Cup 2026</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#groups">Groups</a></li>
+                <li><a href="#timetable">Timetable</a></li>
+                <li><a href="#matches">Matches</a></li>
+                <li><a href="#standings">Standings</a></li>
+                <li><a href="#players">Players</a></li>
+                <li><a href="#stadiums">Stadiums</a></li>
+                <li><a href="#news">News</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>FIFA World Cup 2026</h1>
+            <div class="hosts">
+                <div class="host">USA 🇺🇸</div>
+                <div class="host">Canada 🇨🇦</div>
+                <div class="host">Mexico 🇲🇽</div>
+            </div>
+            <p>Experience the ultimate football spectacle</p>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span id="days">00</span>
+                    <div>Days</div>
+                </div>
+                <div class="countdown-item">
+                    <span id="hours">00</span>
+                    <div>Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes">00</span>
+                    <div>Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">00</span>
+                    <div>Seconds</div>
+                </div>
+            </div>
+            <a href="https://www.fifa.com/worldcup" target="_blank"><button class="btn">Watch Live</button></a>
+        </div>
+        <div class="football"></div>
+    </section>
+
+    <section id="groups">
+        <h2 class="section-title">Groups</h2>
+        <div id="groups-content">
+            <!-- Groups will be populated by JS -->
+        </div>
+    </section>
+
+    <section id="timetable">
+        <h2 class="section-title">Match Timetable</h2>
+        <div id="timetable-content">
+            <!-- Timetable will be populated by JS -->
+        </div>
+    </section>
+
+    <section id="matches">
+        <h2 class="section-title">Matches</h2>
+        <div class="matches" id="matches-content">
+            <!-- Matches will be populated by JS -->
+        </div>
+    </section>
+
+    <section id="standings">
+        <h2 class="section-title">Standings</h2>
+        <div id="standings-content">
+            <!-- Standings will be populated by JS -->
+        </div>
+    </section>
+
+    <section id="players">
+        <h2 class="section-title">Top Scorers</h2>
+        <div id="players-content">
+            <!-- Players will be populated by JS -->
+        </div>
+    </section>
+
+    <section id="stadiums">
+        <h2 class="section-title">Stadiums</h2>
+        <div class="grid" id="stadiums-content">
+            <!-- Stadiums will be populated by JS -->
+        </div>
+    </section>
+
+    <section id="news">
+        <h2 class="section-title">News</h2>
+        <div class="grid" id="news-content">
+            <!-- News will be populated by JS -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#groups">Groups</a>
+                <a href="#timetable">Timetable</a>
+                <a href="#matches">Matches</a>
+                <a href="#standings">Standings</a>
+                <a href="#players">Players</a>
+                <a href="#stadiums">Stadiums</a>
+                <a href="#news">News</a>
+            </div>
+            <div class="social-icons">
+                <a href="#">📘</a>
+                <a href="#">🐦</a>
+                <a href="#">📷</a>
+                <a href="#">📺</a>
+            </div>
+            <p>Designed by mycokhan_haule</p>
+            <p>© HAULE MEDIA. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ==========================================
+        // API CONFIGURATION & CACHING SYSTEM
+        // ==========================================
+        const API_KEY = "c44583e1e9f5460c4d1bf1e1a37903d9";
+        const API_BASE_URL = "https://v3.football.api-sports.io";
+        const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+        const LIVE_UPDATE_INTERVAL = 10 * 1000; // 10 seconds for live matches
+
+        // Supabase Integration (Optional - for production)
+        // const SUPABASE_URL = "YOUR_SUPABASE_URL";
+        // const SUPABASE_KEY = "YOUR_SUPABASE_KEY";
+
+        // Caching System
+        class CacheManager {
+            static set(key, data) {
+                localStorage.setItem(`cache_${key}`, JSON.stringify({
+                    data,
+                    timestamp: Date.now()
+                }));
+            }
+
+            static get(key) {
+                const cached = localStorage.getItem(`cache_${key}`);
+                if (!cached) return null;
+
+                const { data, timestamp } = JSON.parse(cached);
+                if (Date.now() - timestamp > CACHE_DURATION) {
+                    localStorage.removeItem(`cache_${key}`);
+                    return null;
+                }
+                return data;
+            }
+
+            static clear(key) {
+                localStorage.removeItem(`cache_${key}`);
+            }
+
+            static clearAll() {
+                Object.keys(localStorage).forEach(key => {
+                    if (key.startsWith('cache_')) localStorage.removeItem(key);
+                });
+            }
+        }
+
+        // Global State
+        const appState = {
+            fixtures: [],
+            standings: {},
+            teams: {},
+            players: [],
+            news: [],
+            liveMatches: [],
+            loading: false,
+            error: null
+        };
+
+        // ==========================================
+        // API FETCH FUNCTIONS
+        // ==========================================
+
+        async function fetchWithErrorHandling(url, headers = {}) {
+            try {
+                const response = await fetch(url, {
+                    method: "GET",
+                    headers: {
+                        "x-apisports-key": API_KEY,
+                        ...headers
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+
+                return await response.json();
+            } catch (error) {
+                console.error("API Fetch Error:", error);
+                throw error;
+            }
+        }
+
+        // Fetch FIFA World Cup 2026 Fixtures
+        async function fetchFixtures() {
+            const cached = CacheManager.get('fixtures');
+            if (cached) return cached;
+
+            try {
+                showLoading('Loading fixtures...');
+                // World Cup 2026 League ID: 290
+                const data = await fetchWithErrorHandling(
+                    `${API_BASE_URL}/fixtures?league=290&season=2026&sort=date`
+                );
+
+                if (data.response && data.response.length > 0) {
+                    const fixtures = data.response.map(fixture => ({
+                        id: fixture.fixture.id,
+                        date: fixture.fixture.date,
+                        status: fixture.fixture.status.short,
+                        team1: fixture.teams.home.name,
+                        team2: fixture.teams.away.name,
+                        team1Logo: fixture.teams.home.logo,
+                        team2Logo: fixture.teams.away.logo,
+                        score: {
+                            home: fixture.goals.home,
+                            away: fixture.goals.away
+                        },
+                        stadium: fixture.fixture.venue?.name || 'TBA',
+                        round: fixture.league.round
+                    }));
+
+                    CacheManager.set('fixtures', fixtures);
+                    appState.fixtures = fixtures;
+                    hideLoading();
+                    return fixtures;
+                } else {
+                    throw new Error("No fixtures data received");
+                }
+            } catch (error) {
+                console.error("Error fetching fixtures:", error);
+                showError("Failed to load fixtures from API. Using local data.");
+                const localFixtures = loadLocalFixtures();
+                appState.fixtures = localFixtures;
+                return localFixtures;
+            }
+        }
+
+        // Fetch Standings
+        async function fetchStandings() {
+            const cached = CacheManager.get('standings');
+            if (cached) return cached;
+
+            try {
+                const data = await fetchWithErrorHandling(
+                    `${API_BASE_URL}/standings?league=290&season=2026`
+                );
+
+                if (data.response && data.response.length > 0) {
+                    const standings = {};
+                    data.response.forEach(group => {
+                        standings[group.group] = group.standings[0].map(team => ({
+                            name: team.team.name,
+                            flag: team.team.flag,
+                            points: team.points,
+                            played: team.all.played,
+                            wins: team.all.win,
+                            draws: team.all.draw,
+                            loses: team.all.lose,
+                            goalsFor: team.all.goals.for,
+                            goalsAgainst: team.all.goals.against,
+                            goalDiff: team.all.goals.for - team.all.goals.against,
+                            group: group.group
+                        }));
+                    });
+
+                    CacheManager.set('standings', standings);
+                    appState.standings = standings;
+                    return standings;
+                } else {
+                    throw new Error("No standings data");
+                }
+            } catch (error) {
+                console.error("Error fetching standings:", error);
+                showError("Failed to load standings from API. Using local data.");
+                const localStandings = calculateLocalStandings();
+                appState.standings = localStandings;
+                return localStandings;
+            }
+        }
+
+        // Fetch Live Matches
+        async function fetchLiveMatches() {
+            try {
+                const data = await fetchWithErrorHandling(
+                    `${API_BASE_URL}/fixtures?live=all`
+                );
+
+                if (data.response && data.response.length > 0) {
+                    const liveMatches = data.response.map(match => ({
+                        id: match.fixture.id,
+                        team1: match.teams.home.name,
+                        team2: match.teams.away.name,
+                        score: `${match.goals.home} - ${match.goals.away}`,
+                        status: match.fixture.status.short,
+                        elapsed: match.fixture.status.elapsed,
+                        stadium: match.fixture.venue?.name || 'TBA'
+                    }));
+
+                    appState.liveMatches = liveMatches;
+                    updateLiveMatches(liveMatches);
+                    return liveMatches;
+                }
+            } catch (error) {
+                console.error("Error fetching live matches:", error);
+            }
+        }
+
+        // Fetch Top Scorers
+        async function fetchTopScorers() {
+            const cached = CacheManager.get('players');
+            if (cached) return cached;
+
+            try {
+                const data = await fetchWithErrorHandling(
+                    `${API_BASE_URL}/players/topscorers?league=290&season=2026`
+                );
+
+                if (data.response && data.response.length > 0) {
+                    const players = data.response.slice(0, 10).map(player => ({
+                        name: player.player.name,
+                        team: player.statistics[0]?.team.name || 'N/A',
+                        goals: player.statistics[0]?.goals.total || 0,
+                        assists: player.statistics[0]?.goals.assists || 0,
+                        matches: player.statistics[0]?.games.appearances || 0
+                    }));
+
+                    CacheManager.set('players', players);
+                    appState.players = players;
+                    return players;
+                }
+            } catch (error) {
+                console.error("Error fetching top scorers:", error);
+                return loadLocalPlayers();
+            }
+        }
+
+        // ==========================================
+        // LOCAL/FALLBACK DATA
+        // ==========================================
+
+        function loadLocalFixtures() {
+            return [
+                { date: '2026-06-11T20:00:00+00:00', team1: 'South Africa', team2: 'Mexico', stadium: 'Estadio Azteca, Mexico City', round: 'Opening Match', status: 'NS', score: { home: null, away: null } },
+                { date: '2026-06-11T17:00:00+00:00', team1: 'Canada', team2: 'Italy', stadium: 'BMO Field, Toronto', round: 'Group B', status: 'NS', score: { home: null, away: null } },
+                { date: '2026-06-12T20:00:00+00:00', team1: 'Brazil', team2: 'Morocco', stadium: 'SoFi Stadium, Los Angeles', round: 'Group C', status: 'NS', score: { home: null, away: null } },
+                { date: '2026-06-12T17:00:00+00:00', team1: 'France', team2: 'Senegal', stadium: 'MetLife Stadium, New York', round: 'Group I', status: 'NS', score: { home: null, away: null } }
+            ];
+        }
+
+        function loadLocalPlayers() {
+            return [
+                { name: 'Lionel Messi', team: 'Argentina', goals: 0, assists: 0 },
+                { name: 'Neymar Jr', team: 'Brazil', goals: 0, assists: 0 },
+                { name: 'Kylian Mbappé', team: 'France', goals: 0, assists: 0 }
+            ];
+        }
+
+        function calculateLocalStandings() {
+            const groups = {
+    A: [
+        { name: 'Mexico', flag: '🇲🇽', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'South Africa', flag: '🇿🇦', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'South Korea', flag: '🇰🇷', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Czechia', flag: '🇨🇿', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 }
+    ],
+    B: [
+        { name: 'Canada', flag: '🇨🇦', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Bosnia-Herzegovina', flag: '🇧🇦', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Qatar', flag: '🇶🇦', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Switzerland', flag: '🇨🇭', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 }
+    ],
+    C: [
+        { name: 'Brazil', flag: '🇧🇷', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Morocco', flag: '🇲🇦', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Haiti', flag: '🇭🇹', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Scotland', flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 }
+    ],
+    D: [
+        { name: 'USA', flag: '🇺🇸', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Paraguay', flag: '🇵🇾', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Australia', flag: '🇦🇺', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Turkey', flag: '🇹🇷', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 }
+    ],
+    E: [
+        { name: 'Germany', flag: '🇩🇪', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Curaçao', flag: '🇨🇼', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Ivory Coast', flag: '🇨🇮', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Ecuador', flag: '🇪🇨', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 }
+    ],
+    F: [
+        { name: 'Netherlands', flag: '🇳🇱', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Japan', flag: '🇯🇵', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Sweden', flag: '🇸🇪', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Tunisia', flag: '🇹🇳', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 }
+    ],
+    G: [
+        { name: 'Belgium', flag: '🇧🇪', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Egypt', flag: '🇪🇬', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Iran', flag: '🇮🇷', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'New Zealand', flag: '🇳🇿', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 }
+    ],
+    H: [
+        { name: 'Spain', flag: '🇪🇸', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Cape Verde', flag: '🇨🇻', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Saudi Arabia', flag: '🇸🇦', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Uruguay', flag: '🇺🇾', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 }
+    ],
+    I: [
+        { name: 'France', flag: '🇫🇷', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Senegal', flag: '🇸🇳', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Iraq', flag: '🇮🇶', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Norway', flag: '🇳🇴', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 }
+    ],
+    J: [
+        { name: 'Argentina', flag: '🇦🇷', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Algeria', flag: '🇩🇿', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Austria', flag: '🇦🇹', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Jordan', flag: '🇯🇴', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 }
+    ],
+    K: [
+        { name: 'Portugal', flag: '🇵🇹', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'DR Congo', flag: '🇨🇩', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Uzbekistan', flag: '🇺🇿', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Colombia', flag: '🇨🇴', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 }
+    ],
+    L: [
+        { name: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Croatia', flag: '🇭🇷', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Ghana', flag: '🇬🇭', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 },
+        { name: 'Panama', flag: '🇵🇦', points: 0, played: 0, wins: 0, draws: 0, loses: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0 }
+    ]
+
+            };
+            return groups;
+        }
+
+        // ==========================================
+        // UI RENDERING FUNCTIONS
+        // ==========================================
+
+        function showLoading(message = 'Loading...') {
+            const container = document.getElementById('matches-content') || document.body;
+            container.innerHTML = `<div class="loading-container"><div class="loading"></div><p>${message}</p></div>`;
+        }
+
+        function hideLoading() {
+            // Handled by render functions
+        }
+
+        function showError(message) {
+            appState.error = message;
+            const errorEl = document.createElement('div');
+            errorEl.className = 'error-message';
+            errorEl.textContent = message;
+            console.error(message);
+        }
+
+        function showSuccess(message) {
+            const successEl = document.createElement('div');
+            successEl.className = 'success-message';
+            successEl.textContent = message;
+        }
+
+        // Render Fixtures with Live Status
+        function renderFixtures(fixtures) {
+            const container = document.getElementById('matches-content');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            if (!fixtures || fixtures.length === 0) {
+                container.innerHTML = '<div class="card"><p>No fixtures available</p></div>';
+                return;
+            }
+
+            fixtures.slice(0, 6).forEach(fixture => {
+                const isLive = fixture.status === 'LIVE' || fixture.status === '1H' || fixture.status === '2H' || fixture.status === 'ET' || fixture.status === 'P' || fixture.status === 'INT';
+                const matchDiv = document.createElement('div');
+                matchDiv.className = `match card ${isLive ? 'live' : ''}`;
+
+                const scoreDisplay = fixture.status === 'NS' || fixture.status === 'TBD'
+                    ? 'vs'
+                    : `${fixture.score.home} - ${fixture.score.away}`;
+
+                const liveBadge = isLive ? '<span class="live-badge">🔴 LIVE</span>' : '';
+
+                matchDiv.innerHTML = `
+                    <h3>${fixture.team1} ${scoreDisplay} ${fixture.team2} ${liveBadge}</h3>
+                    <p>${new Date(fixture.date).toLocaleString()}</p>
+                    <p>Stadium: ${fixture.stadium}</p>
+                    <p>Round: ${fixture.round}</p>
+                `;
+                container.appendChild(matchDiv);
+            });
+        }
+
+        // Render Standings
+        function renderStandings(standings) {
+            const container = document.getElementById('standings-content');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            if (!standings || Object.keys(standings).length === 0) {
+                container.innerHTML = '<div class="card"><p>Standings not available yet</p></div>';
+                return;
+            }
+
+            Object.entries(standings).forEach(([groupName, teams]) => {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'card';
+                groupDiv.innerHTML = `<h3>Group ${groupName}</h3>`;
+
+                const table = document.createElement('table');
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Team</th>
+                            <th>P</th>
+                            <th>W</th>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>GF</th>
+                            <th>GA</th>
+                            <th>GD</th>
+                            <th>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${teams.map(team => `
+                            <tr>
+                                <td>${team.flag} ${team.name}</td>
+                                <td>${team.played}</td>
+                                <td>${team.wins}</td>
+                                <td>${team.draws}</td>
+                                <td>${team.loses}</td>
+                                <td>${team.goalsFor}</td>
+                                <td>${team.goalsAgainst}</td>
+                                <td>${team.goalDiff}</td>
+                                <td><strong>${team.points}</strong></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                `;
+                groupDiv.appendChild(table);
+                container.appendChild(groupDiv);
+            });
+        }
+
+        // Render Top Scorers
+        function renderPlayers(players) {
+            const container = document.getElementById('players-content');
+            if (!container) return;
+
+            if (!players || players.length === 0) {
+                container.innerHTML = '<div class="card"><p>Top scorers not available yet</p></div>';
+                return;
+            }
+
+            const table = document.createElement('table');
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>Goals</th>
+                        <th>Assists</th>
+                        <th>Matches</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${players.map(player => `
+                        <tr>
+                            <td>${player.name}</td>
+                            <td>${player.team}</td>
+                            <td>${player.goals}</td>
+                            <td>${player.assists}</td>
+                            <td>${player.matches}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            `;
+            container.innerHTML = '';
+            container.appendChild(table);
+        }
+
+        // Update Live Matches in Real-Time
+        function updateLiveMatches(liveMatches) {
+            const container = document.getElementById('matches-content');
+            if (!container || !liveMatches.length) return;
+
+            // Find and update live match cards
+            const cards = container.querySelectorAll('.match.live');
+            liveMatches.forEach((liveMatch, index) => {
+                if (cards[index]) {
+                    const teamLine = cards[index].querySelector('h3');
+                    teamLine.innerHTML = `${liveMatch.team1} ${liveMatch.score} ${liveMatch.team2} <span class="live-badge">🔴 LIVE</span>`;
+                }
+            });
+        }
+
+        // ==========================================
+        // INITIALIZATION & REAL-TIME POLLING
+        // ==========================================
+
+        async function initializeApp() {
+            try {
+                appState.loading = true;
+
+                // Fetch all data in parallel
+                const [fixtures, standings, players] = await Promise.all([
+                    fetchFixtures(),
+                    fetchStandings(),
+                    fetchTopScorers()
+                ]);
+
+                // Render all sections
+                renderFixtures(fixtures);
+                renderStandings(standings);
+                renderPlayers(players);
+
+                appState.loading = false;
+                showSuccess('Data loaded successfully!');
+            } catch (error) {
+                console.error("App initialization error:", error);
+                appState.error = error.message;
+            }
+        }
+
+        // Countdown function
+        const tournamentStart = new Date('2026-06-11T00:00:00');
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = tournamentStart - now;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                const days_el = document.getElementById('days');
+                const hours_el = document.getElementById('hours');
+                const minutes_el = document.getElementById('minutes');
+                const seconds_el = document.getElementById('seconds');
+
+                if (days_el) days_el.textContent = days.toString().padStart(2, '0');
+                if (hours_el) hours_el.textContent = hours.toString().padStart(2, '0');
+                if (minutes_el) minutes_el.textContent = minutes.toString().padStart(2, '0');
+                if (seconds_el) seconds_el.textContent = seconds.toString().padStart(2, '0');
+            } else {
+                const countdownEl = document.getElementById('countdown');
+                if (countdownEl) countdownEl.innerHTML = '<div>🏆 Tournament Started!</div>';
+            }
+        }
+
+        // Populate Groups (Static for now)
+        function populateGroups() {
+            const groups = {
+                A: ['Mexico', 'South Africa', 'South Korea', 'Denmark'],
+                B: ['Canada', 'Italy', 'Qatar', 'Switzerland'],
+                C: ['Brazil', 'Morocco', 'Haiti', 'Scotland'],
+                D: ['USA', 'Paraguay', 'Australia', 'Türkiye'],
+                E: ['Germany', 'Curaçao', 'Ivory Coast', 'Ecuador'],
+                F: ['Netherlands', 'Japan', 'Sweden', 'Tunisia'],
+                G: ['Belgium', 'Egypt', 'Iran', 'New Zealand'],
+                H: ['Spain', 'Cape Verde', 'Saudi Arabia', 'Uruguay'],
+                I: ['France', 'Senegal', 'Iraq', 'Norway'],
+                J: ['Argentina', 'Algeria', 'Austria', 'Jordan'],
+                K: ['Portugal', 'Jamaica', 'Uzbekistan', 'Colombia'],
+                L: ['England', 'Croatia', 'Ghana', 'Panama']
+            };
+
+            const container = document.getElementById('groups-content');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            Object.entries(groups).forEach(([groupName, teamNames]) => {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'card';
+                groupDiv.innerHTML = `<h3>Group ${groupName}</h3><p>${teamNames.join(', ')}</p>`;
+                container.appendChild(groupDiv);
+            });
+        }
+
+        // Populate Stadiums (Static)
+        function populateStadiums() {
+            const stadiums = [
+                { name: 'Estadio Azteca', capacity: 87000, city: 'Mexico City', country: '🇲🇽' },
+                { name: 'AT&T Stadium', capacity: 80000, city: 'Dallas', country: '🇺🇸' },
+                { name: 'MetLife Stadium', capacity: 82500, city: 'New York', country: '🇺🇸' },
+                { name: 'SoFi Stadium', capacity: 70240, city: 'Los Angeles', country: '🇺🇸' },
+                { name: 'BMO Field', capacity: 30000, city: 'Toronto', country: '🇨🇦' },
+                { name: 'BC Place', capacity: 54400, city: 'Vancouver', country: '🇨🇦' }
+            ];
+
+            const container = document.getElementById('stadiums-content');
+            if (!container) return;
+
+            container.innerHTML = '';
+            stadiums.forEach(stadium => {
+                const div = document.createElement('div');
+                div.className = 'card';
+                div.innerHTML = `<h3>${stadium.name} ${stadium.country}</h3><p>Capacity: ${stadium.capacity}</p><p>${stadium.city}</p>`;
+                container.appendChild(div);
+            });
+        }
+
+        // Populate News (Static)
+        function populateNews() {
+            const news = [
+                { title: 'FIFA World Cup 2026: Hosts Ready', content: 'USA, Canada, and Mexico prepare for the tournament.' },
+                { title: 'Opening Match: South Africa vs Mexico', content: 'The tournament kicks off with an exciting opening match at Estadio Azteca.' }
+            ];
+
+            const container = document.getElementById('news-content');
+            if (!container) return;
+
+            container.innerHTML = '';
+            news.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'card';
+                div.innerHTML = `<h3>${item.title}</h3><p>${item.content}</p>`;
+                container.appendChild(div);
+            });
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+
+            populateGroups();
+            populateStadiums();
+            populateNews();
+
+            // Initialize API-driven sections
+            initializeApp();
+
+            // Real-time polling for live matches
+            setInterval(fetchLiveMatches, LIVE_UPDATE_INTERVAL);
+
+            // Refresh data every 5 minutes
+            setInterval(() => {
+                CacheManager.clearAll();
+                initializeApp();
+            }, 5 * 60 * 1000);
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Animated particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Position football
+        const football = document.querySelector('.football');
+        if (football) {
+            football.style.left = Math.random() * 80 + 10 + '%';
+            football.style.top = Math.random() * 80 + 10 + '%';
+        }
+    </script>
+
+</body>
+</html>
